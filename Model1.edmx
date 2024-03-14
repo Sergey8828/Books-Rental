@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CA3_s00242123__DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookingTbl">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Start_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="End_Date" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Book_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookTbl">
+          <Key>
+            <PropertyRef Name="Book_Id" />
+          </Key>
+          <Property Name="Book_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BookingTbl_BookTbl">
+          <End Role="BookTbl" Type="Self.BookTbl" Multiplicity="1" />
+          <End Role="BookingTbl" Type="Self.BookingTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookTbl">
+              <PropertyRef Name="Book_Id" />
+            </Principal>
+            <Dependent Role="BookingTbl">
+              <PropertyRef Name="Book_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CA3_s00242123__DataModelStoreContainer">
+          <EntitySet Name="BookingTbl" EntityType="Self.BookingTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookTbl" EntityType="Self.BookTbl" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BookingTbl_BookTbl" Association="Self.FK_BookingTbl_BookTbl">
+            <End Role="BookTbl" EntitySet="BookTbl" />
+            <End Role="BookingTbl" EntitySet="BookingTbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CA3_s00242123__DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BookingTbl">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="End_Date" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Book_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BookTbl" Relationship="Self.FK_BookingTbl_BookTbl" FromRole="BookingTbl" ToRole="BookTbl" />
+        </EntityType>
+        <EntityType Name="BookTbl">
+          <Key>
+            <PropertyRef Name="Book_Id" />
+          </Key>
+          <Property Name="Book_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BookingTbls" Relationship="Self.FK_BookingTbl_BookTbl" FromRole="BookTbl" ToRole="BookingTbl" />
+        </EntityType>
+        <Association Name="FK_BookingTbl_BookTbl">
+          <End Role="BookTbl" Type="Self.BookTbl" Multiplicity="1" />
+          <End Role="BookingTbl" Type="Self.BookingTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookTbl">
+              <PropertyRef Name="Book_Id" />
+            </Principal>
+            <Dependent Role="BookingTbl">
+              <PropertyRef Name="Book_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CA3_s00242123__DataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BookingTbls" EntityType="Self.BookingTbl" />
+          <EntitySet Name="BookTbls" EntityType="Self.BookTbl" />
+          <AssociationSet Name="FK_BookingTbl_BookTbl" Association="Self.FK_BookingTbl_BookTbl">
+            <End Role="BookTbl" EntitySet="BookTbls" />
+            <End Role="BookingTbl" EntitySet="BookingTbls" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CA3_s00242123__DataModelStoreContainer" CdmEntityContainer="CA3_s00242123__DataEntities">
+          <EntitySetMapping Name="BookingTbls">
+            <EntityTypeMapping TypeName="CA3_s00242123__DataModel.BookingTbl">
+              <MappingFragment StoreEntitySet="BookingTbl">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Book_Id" ColumnName="Book_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookTbls">
+            <EntityTypeMapping TypeName="CA3_s00242123__DataModel.BookTbl">
+              <MappingFragment StoreEntitySet="BookTbl">
+                <ScalarProperty Name="Book_Id" ColumnName="Book_Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
