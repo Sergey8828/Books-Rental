@@ -73,7 +73,7 @@
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 <DataGrid Name="dgBookings" Grid.Row="0" Grid.Column="0" SelectionChanged="dgBookings_SelectionChanged" Grid.ColumnSpan="4" Margin="0,0,0,379" Grid.RowSpan="2"/>
-                <Button x:Name="btnDelete"  Content="Delete" HorizontalAlignment="Right" Background="Brown" VerticalAlignment="Top" Width="88" IsEnabled="False"  Click="btnDelete_Click" Grid.Column="3" Margin="0,175,58,0" Grid.Row="1" Height="56" FontSize="16" Foreground="#FF838383"/>
+                <Button x:Name="btnDelete"  Content="Delete" HorizontalAlignment="Right" Background="Brown" VerticalAlignment="Top" Width="88" IsEnabled="False"  Click="btnDelete_Click" Grid.Column="3" Margin="0,175,58,0" Grid.Row="1" Height="56" FontSize="16" Foreground="Black" FontWeight="Bold"/>
             </Grid>
         </TabItem>
     </TabControl>
